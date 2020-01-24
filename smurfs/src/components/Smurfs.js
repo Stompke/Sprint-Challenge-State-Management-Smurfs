@@ -8,7 +8,7 @@ import { test, fetchData } from '../actions'
 
 const Smurfs = props => {
 
-    console.log(props)
+
 
     useEffect(() => {
 
@@ -17,8 +17,7 @@ const Smurfs = props => {
     },[])
 
     return (
-        <div>
-            <h1>List of All Smurfs</h1>
+        <div className='smurfs-container'>
             {props.isLoading ? <Loader
             type="Puff"
             color="#00BFFF"
@@ -27,7 +26,7 @@ const Smurfs = props => {
             timeout={3000} //3 secs
             /> : ''}
             {props.smurfs.map(item => <Smurf name={item.name} age={item.age} height={item.height} key={item.id} />)}
-            <button onClick={props.test}></button>
+
         </div>
     )
 }

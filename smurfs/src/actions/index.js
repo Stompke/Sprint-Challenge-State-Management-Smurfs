@@ -19,3 +19,24 @@ export const fetchData = () => {
         })
     }
 }
+
+export const postData = (newName,newAge,newHeight) => {
+    return dispatch => {
+        dispatch({ type: 'POSTING_DATA_START'});
+        axios
+        .post('http://localhost:3333/smurfs',
+            {
+             name: newName,
+             age: newAge,
+             height: newHeight,
+             id: Date.now()
+            }
+        )
+        .then(res => {
+            dispatch({type: 'FETCHING_DATA_SUCCESS', payload: res.data})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+}
