@@ -15,7 +15,7 @@ export const fetchData = () => {
             dispatch({type: 'FETCHING_DATA_SUCCESS', payload: res.data})
         })
         .catch(err => {
-            console.log(err)
+            console.log('didnt work', err)
         })
     }
 }
@@ -37,6 +37,48 @@ export const postData = (newName,newAge,newHeight) => {
         })
         .catch(err => {
             console.log(err)
+        })
+    }
+}
+
+export const changeData = (id, newName, age, height)=>  {
+    return dispatch => {
+        dispatch({type: 'POSTING_DATA_START'});
+        axios
+        .put(`http://localhost:3333/smurfs/${id}`,
+            {
+            id: id,
+            name: newName,
+            age: age,
+            height: height
+            }
+        )
+        .then(res => {
+            dispatch({type: 'FETCHING_DATA_SUCCESS', payload: res.data})
+        })
+        .catch(err => {
+            console.log(err)
+        })
+    }
+}
+
+export const selectSmurf = id => {
+    return dispatch => {
+        dispatch({type: 'SELECT_SMURF', payload: id})
+    }
+}
+
+export const deleteSmurf = id => {
+    return dispatch => {
+        // dispatch({type: 'POSTING_DATA_START'});
+        axios
+        .delete(`http://localhost:3333/smurfs/${id}`)
+        .then(res => {
+            alert('it worked')
+            dispatch({type: 'FETCHING_DATA_SUCCESS', payload: res.data})
+        })
+        .catch(err => {
+            alert(err)
         })
     }
 }

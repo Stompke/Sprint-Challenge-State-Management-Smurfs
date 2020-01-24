@@ -9,3 +9,13 @@ body {
   justify-content: center;
   flex-flow: row wrap;
 }
+
+.yup {
+  background: lightblue;
+  margin-top: -20px;
+  /* margin: 30px; */
+}
+
+.hide {
+  display: none;
+}

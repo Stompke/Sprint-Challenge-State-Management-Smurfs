@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 import { connect } from 'react-redux';
 
-import { postData } from '../actions';
+import { postData, changeData } from '../actions';
 
 const Form = props => {
     const [name, setName] = useState('');
@@ -22,6 +22,7 @@ const Form = props => {
 
     return (
         <div>
+            <button onClick={() => props.changeData(props.selectedSmurf, name, age, height)}>change it!!!</button>
             <input onChange={nameHandler} type='text' placeholder='name'/>
             <input onChange={ageHandler} type='text' placeholder='age'/>
             <input onChange={heightHandler} type='text' placeholder='height'/>
@@ -35,11 +36,12 @@ const Form = props => {
 const mapStateToProps = state => {
     return {
         isLoading: state.isLoading,
-        smurfs: state.smurfs
+        smurfs: state.smurfs,
+        selectedSmurf: state.selectedSmurf
     }
 }
 
 export default connect(
     mapStateToProps,
-    { postData }
+    { postData, changeData }
 )(Form);

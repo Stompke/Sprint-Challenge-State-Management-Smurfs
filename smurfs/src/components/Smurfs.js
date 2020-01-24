@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Loader from "react-loader-spinner";
 
 import Smurf from './Smurf';
-import { test, fetchData } from '../actions'
+import { test, fetchData, selectSmurf, deleteSmurf } from '../actions'
 
 
 const Smurfs = props => {
@@ -25,8 +25,18 @@ const Smurfs = props => {
             width={100}
             timeout={3000} //3 secs
             /> : ''}
-            {props.smurfs.map(item => <Smurf name={item.name} age={item.age} height={item.height} key={item.id} />)}
+            {props.smurfs.map(item => 
+            <Smurf 
+            id={item.id} 
+            deleteSmurf={() => props.deleteSmurf(item.id)}
+            selectedSmurf={props.selectedSmurf} 
+            selectSmurf={() => props.selectSmurf(item.id)} 
+            name={item.name} 
+            age={item.age} 
+            height={item.height} 
+            key={item.id} />)}
 
+                
         </div>
     )
 }
@@ -36,11 +46,12 @@ const Smurfs = props => {
 const mapStateToProps = state => {
     return {
         isLoading: state.isLoading,
-        smurfs: state.smurfs
+        smurfs: state.smurfs,
+        selectedSmurf: state.selectedSmurf
     }
 }
 
 export default connect(
     mapStateToProps,
-    { test, fetchData }
+    { test, fetchData, selectSmurf, deleteSmurf }
 )(Smurfs);

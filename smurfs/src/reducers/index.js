@@ -2,7 +2,8 @@
 
 const initialState = {
     isLoading: false,
-    smurfs: []
+    smurfs: [],
+    selectedSmurf: null
 }
 
 export const reducer = (state = initialState, action) => {
@@ -33,6 +34,13 @@ export const reducer = (state = initialState, action) => {
         case 'TEST_CALL':
             console.log('test worked!'); 
             return state
+        
+        case 'SELECT_SMURF':
+            return {
+                ...state,
+                selectedSmurf: action.payload
+            }
+        
         default:
             return state;
     }
